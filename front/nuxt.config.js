@@ -97,6 +97,7 @@ module.exports = {
     },
     server:{
         port: process.env.PORT || 80,
+        host: '0.0.0.0'
     },
     
 };
