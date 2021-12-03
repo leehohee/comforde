@@ -29,7 +29,7 @@ if (prod){
     app.use(hpp());
     app.use(morgan('combined'));
     app.use(cors({
-        origin: ['http://localhost:3000','http://dothemagic.net:3000','http://221.167.218.93:3000','http://localhost:4000','http://www.comforde.co.kr'],
+        origin: ['http://localhost:3000','http://dothemagic.net:3000','http://221.167.218.93:3000','http://localhost:4000','http://www.comforde.co.kr','http://localhost:80'],
         credentials: true,
     }));
 } else {

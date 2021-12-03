@@ -91,8 +91,8 @@ module.exports = {
 
     ],
     axios:{
-        browserBaseURL: 'http://localhost:3085',
-        baseURL: 'localhost:3085',
+        browserBaseURL: 'http://localhost:3065',
+        baseURL: 'localhost:3065',
         https: false,
     },
     server:{
