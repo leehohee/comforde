@@ -7,7 +7,7 @@
     "dev": "nuxt",
     "lint": "eslint **/*",
     "build": "nuxt build",
-    "prestart":"npm run build",
+    
     "start": "cross-env PORT=80 NODE_ENV=production node server.js"
   },
   "author": "",
