@@ -1,5 +1,5 @@
 {
-  "name": "vue-nodebird-front",
+  "name": "comforde-front",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "lint": "eslint **/*",
     "build": "nuxt build",
     
-    "start": "cross-env PORT=80 NODE_ENV=production nuxt start"
+    "start": "cross-env PORT=80 NODE_ENV=production node server.js"
   },
   "author": "",
   "license": "ISC",
