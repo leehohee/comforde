@@ -72,6 +72,6 @@ app.use('/hashtag', hashtagRouter);
 
 
 
-app.listen(prod ? process.env.PORT : 3085, ()=>{
-    console.log(`백엔드 서버 ${prod ? process.env.PORT : 3085}번 포트에서 작동중.`);
+app.listen(prod ? process.env.PORT : 80, ()=>{
+    console.log(`백엔드 서버 ${prod ? process.env.PORT : 80}번 포트에서 작동중.`);
 });
