@@ -38,7 +38,20 @@
                         required
                     />
                     
-                    
+                    <v-radio-group
+                    v-model="status"
+                    row
+                    required
+                    >
+                        <v-radio
+                            label="디자이너로 가입"
+                            value="designer"
+                        ></v-radio>
+                        <v-radio
+                            label="의뢰인으로 가입"
+                            value="user"
+                        ></v-radio>
+                    </v-radio-group>
                     <v-checkbox
                         v-model="terms"
                         required
@@ -63,8 +76,8 @@ export default {
             password:'',
             passwordCheck:'',
             nickname:'',
-            conname:'',
-            sigongname:'',
+            status:'',
+            
             terms:false,
             emailRules: [  
                 v => !!v || '이메일은 필수입니다.',
@@ -102,6 +115,7 @@ export default {
                     nickname:this.nickname,
                     email:this.email,
                     password:this.password,
+                    status:this.status,
                 })
                     .then(()=>{
                         this.$router.push({
@@ -112,6 +126,17 @@ export default {
                     .catch(()=>{
                         alert('회원가입실패');
                     });
+                
+            }else{
+                alert('폼이 유효하지 않습니다.');
+            }
+
+        },
+        onSubmitForm2(){
+            if (this.$refs.form.validate()){
+                console.log(this.nickname,this.email,this.password,this.status);
+                    
+               
                 
             }else{
                 alert('폼이 유효하지 않습니다.');

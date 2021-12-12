@@ -1,30 +1,6 @@
 <template>
     <v-container v-if="!me">
-        <v-card elevation="0" class="px-3 mb-12">
-            <v-row class="d-flex justify-space-around">
-            
-                <v-card nuxt to="signup" elevation="0" class="pa-2 d-flex justify-center align-center" width="52" height="52" :style="{backgroundColor:'green',borderRadius:'50%'}">
-                    
-                        <v-img src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/naver_logo.png" width="32" height="32" />
-                
-                </v-card>
-                <v-card elevation="0" class="pa-2 d-flex justify-center align-center" width="52" height="52" :style="{backgroundColor:'yellow',borderRadius:'50%'}">
-                    
-                        <v-img src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/kakao_logo.png" width="32" height="32" />
-                    
-                </v-card>
-                <v-card elevation="0" class="pa-2 d-flex justify-center align-center" width="52" height="52" :style="{backgroundColor:'blue',borderRadius:'50%'}">
-                
-                        <v-img src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/facebook_logo_white.png" width="32" height="32" />
-                
-                </v-card>
-                <v-card elevation="0" class="pa-2 d-flex justify-center align-center" width="52" height="52" :style="{backgroundColor:'white',borderRadius:'50%'}">
-                    
-                        <v-img src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/google_logo.png" width="32" height="32" />
-                    
-                </v-card>
-            </v-row>
-        </v-card>
+        
         <v-card elevation="0">
             <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
                     <h4>이메일</h4>

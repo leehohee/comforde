@@ -13,10 +13,10 @@
             :style="{ position:'fixed', top: '0px',zIndex:'100', width:'100%', marginLeft:'0px'}"
             >
                 
-                    <v-btn v-if="1" icon nuxt to="/alarm" :style="{ marginLeft:'0px',paddingLeft:'0px', display:'flex', alignItems: 'center'}">
+                    <v-btn v-if="1" icon nuxt to="/webindex" :style="{ marginLeft:'0px',paddingLeft:'0px', display:'flex', alignItems: 'center'}">
                             <v-icon>mdi-bell-outline</v-icon>
                     </v-btn>
-                    <v-btn v-else icon nuxt to="/alarm" :style="{ marginLeft:'0px',paddingLeft:'0px', display:'flex', alignItems: 'center'}">
+                    <v-btn v-else icon nuxt to="/webindex" :style="{ marginLeft:'0px',paddingLeft:'0px', display:'flex', alignItems: 'center'}">
                             <v-icon>mdi-chevron-left</v-icon>
                     </v-btn>
                     <v-spacer></v-spacer>

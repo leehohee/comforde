@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     });
     Image.associate = (db) => {
         db.Image.belongsTo(db.Post);
-        db.Image.belongsTo(db.Hashtag);
+        db.Image.belongsTo(db.Item);
+        db.Image.belongsTo(db.Comment);
     };
     return Image;
 };

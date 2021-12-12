@@ -1,51 +1,72 @@
 <template>
-    <v-card elevation="0" min-width="100%" style="width:100%, margin-bottom:20px">
+    <v-card elevation="0" min-width="100%" :style="{width:'100%', marginBottom:'40px'}">
         <v-container fluid>
             
-            <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
-                <h4>기본정보</h4>
+            <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm2">
+                <h4>제목</h4>
+                <v-text-field
+                    v-model="title"
+                    counter
+                    clearable
+                    outlined
+                    required
+                    dense
+                />
+                <h4>카테고리</h4>
+                <v-select
+                :items="items"
+                v-model="category"
+                outlined
+                dense
+                ></v-select>
+                <h4>서비스 설명</h4>
                 <v-textarea
                     outlined
-                    auto-grow
+                    
                     clearable
+                    counter
+                    no-resize
+                    rows="10"
                     v-model="content"
-                    label="서비스를 잘 들어낼 수 있는 내용을 입력해주세요."
+                    placeholder="디자이너 소개, 작업 가능 분야, 작업 제공 절차, 서비스 특정에 대해서 의뢰인이 이해하기 쉽도록 정확하게 작성해 주세요."
+                    :value="value"
                     :hide-details="hideDetails"
                     :success-messages="successMessages"
                     :success="success"
                     @input="onChangeTextarea"
                 />
-                <h4 class="mt-5">서비스 설명</h4>
+                <h4 class="mt-5">수정 및 재진행 안내</h4>
                 <v-textarea
                     outlined
-                    auto-grow
+                    
                     clearable
-                    v-model="content1"
-                    label=" 취소 및 환불규정은 판매하시는 서비스의 관련 법령에 따라 일괄 적용됩니다."
+                    counter
+                    
+                    v-model="modify"
+                    placeholder="무상으로 제공 가능한 수정 범위를 구체적으로 작성해주세요."
+                    :value="value"
                     :hide-details="hideDetails"
                     :success-messages="successMessages"
                     :success="success"
                     @input="onChangeTextarea"
                 />
-                <h4 class="mt-5">요청사항</h4>
-                <v-textarea
-                    class="mb-5"
+                <h4 class="mt-5">취소 및 환불 규정</h4>
+                <div class="pa-1"><h5 class="grey--text">취소 및 환불규정은 판매하시는 서비스의 관련 법령에 따라 일괄 적용됩니다.</h5></div>
+                <h4 class="mt-5">가격설정</h4>
+                <v-text-field
+                    v-model="cost"
+                    dense
+                    clearable
                     outlined
-                    auto-grow
-                    clearable
-                    v-model="content2"
-                    label="결제를 완료한 의뢰인에게만 보여지며, 작성된 답변은 거래화면에서 확인 가능합니다."
-                    :hide-details="hideDetails"
-                    :success-messages="successMessages"
-                    :success="success"
-                    @input="onChangeTextarea"
+                    required
+                    prepend-icon="mdi-currency-krw"
                 />
-                <v-btn type="submit" absolute right>올리기</v-btn>
+                <v-btn type="submit" absolute right>제출하기</v-btn>
                 <input ref="imageInput" type="file" multiple hidden @change="onChangeImages">
-                <v-btn @click="onClickImageUpload" type="button">사진올리기</v-btn>
-                <div>
-                    <div v-for="(p, i) in imagePaths" :key="p" style="display: inline-block">
-                        <img :src="`http://localhost:3085/${p}`" :alt="p" style="width: 200px">
+                <v-btn @click="onClickImageUpload" type="button">이미지등록</v-btn>
+                <div class="mt-5">
+                    <div class="mb-2" v-for="(p, i) in imagePaths" :key="p" style="display: inline-block">
+                        <img :src="`http://localhost:3065/${p}`" :alt="p" style="width: 200px">
                         <div>
                             <button @click="onRemoveImage(i)" type="button">제거</button>
                         </div>
@@ -67,6 +88,10 @@ export default {
             successMessages:'',
             success: false,
             content:'',
+            items: ['로고', '배너', '포스터', '패키지','디테일','비디오'],
+            category:'',
+            value: 'Hello!',
+            cost:'',
         }
     },
     computed:{
@@ -75,7 +100,7 @@ export default {
     },
     methods:{
         onChangeTextarea(value){
-            if(value.length){
+            if(value){
 
                 this.hideDetails = true;
                 this.success = false;
@@ -84,12 +109,14 @@ export default {
         },
         onSubmitForm(){
             if(this.$refs.form.validate()){
-                this.$store.dispatch('posts/add',{
+                this.$store.dispatch('posts/addItem',{
                     content: this.content,
+                    modify:this.modify,
                     
                 })
                     .then(()=>{
                         this.content = '';
+
                         this.hideDetails = false;
                         this.success = true;
                         this.successMessages = '게시글 등록 성공!';
@@ -98,6 +125,13 @@ export default {
 
                     });
             }
+        },
+        onSubmitForm2(){
+            console.log(this.category);
+                    
+                    
+                
+            
         },
         onClickImageUpload(){
             this.$refs.imageInput.click();

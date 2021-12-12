@@ -8,7 +8,7 @@
         </nuxt-link>
         <h4 class="pt-2 font-weight-bold">눌러보세요</h4>
         <v-row class="my-8"><nuxt-link to="/loginpage"><h5>로그인/회원가입</h5></nuxt-link></v-row>
-        <v-row class="my-8"><h5>판매 시작하기</h5></v-row>
+        <v-row class="my-8"><nuxt-link to="/serviceedit"><h5>판매 시작하기</h5></nuxt-link></v-row>
         <v-row class="my-8"><h5>친구초대</h5></v-row>
         <v-row class="my-8"><h5>크몽 이용방법</h5></v-row>
         <v-row class="my-8"><h5>고객센터</h5></v-row>

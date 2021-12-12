@@ -10,6 +10,7 @@ module.exports = {
               ],
         
     },
+    components : true,
     modules: [
         '@nuxtjs/axios',
         ['nuxt-viewport', {
@@ -97,7 +98,7 @@ module.exports = {
     },
     server:{
         port: process.env.PORT || 80,
-        host: '0.0.0.0'
+        
     },
     
 };

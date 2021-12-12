@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     });
     Comment.associate = (db) => {
         db.Comment.belongsTo(db.User);
-        db.Comment.belongsTo(db.Post);
-        db.Comment.belongsToMany(db.User, { through: 'Like2', as: 'Picked'}); 
+        db.Comment.belongsTo(db.Item);
+        db.Comment.hasMany(db.Image);
     };
     return Comment;
 };
