@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         
         db.Item.hasMany(db.Image);
         
-        
+        db.Item.belongsToMany(db.User, { through: 'Like3', as: 'Itemlikers'}); //liked 와 대응되는 likers
         
     };
     return Item;

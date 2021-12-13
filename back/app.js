@@ -29,13 +29,13 @@ if (prod){
     app.use(hpp());
     app.use(morgan('combined'));
     app.use(cors({
-        origin: ['http://localhost:3000','http://dothemagic.net:3000','http://221.167.218.93:3000','http://localhost:4000','http://www.comforde.co.kr','http://localhost:80','http://localhost'],
+        origin: ['http://localhost:3000','http://dothemagic.net:3000','http://221.167.218.93:3000','http://localhost:4000','http://www.comforde.co.kr','http://localhost:80','http://localhost','http://13.124.120.85:80'],
         credentials: true,
     }));
 } else {
     app.use(morgan('dev'));
     app.use(cors({
-        origin: ['http://localhost:3000','http://dothemagic.net:3000','http://221.167.218.93:3000','http://localhost:4000','http://localhost:80','http://localhost:2525','http://localhost:2552','http://localhost'],
+        origin: ['http://localhost:3000','http://dothemagic.net:3000','http://221.167.218.93:3000','http://localhost:4000','http://localhost:80','http://localhost:2525','http://localhost:2552','http://localhost','http://13.124.120.85:80'],
         credentials: true,
     }));
 }
@@ -72,6 +72,6 @@ app.use('/hashtag', hashtagRouter);
 
 
 
-app.listen(prod ? process.env.PORT : 3065, ()=>{
-    console.log(`백엔드 서버 ${prod ? process.env.PORT : 3065}번 포트에서 작동중.`);
+app.listen(prod ? process.env.PORT : 80, ()=>{
+    console.log(`백엔드 서버 ${prod ? process.env.PORT : 80}번 포트에서 작동중.`);
 });
