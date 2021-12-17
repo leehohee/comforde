@@ -1,10 +1,6 @@
 <template>
   <div>
-    <v-tabs grow color="yellow">
-        <v-tab>서비스</v-tab>
-        <v-tab>포트폴리오</v-tab>
-       
-    </v-tabs>
+    <div v-if="me">
     <v-container>
         <v-row>
             <v-col
@@ -86,10 +82,21 @@
     </div>
 
   </div>
+      <div v-else>
+    <LoginForm />
+  </div>
+  
+  </div>
 </template>
 
 <script>
+
+import LoginForm from '~/components/LoginForm';
 export default {
+    components: {
+        
+        LoginForm,
+    },
     data (){
         return {
             item2s: [
@@ -126,7 +133,13 @@ export default {
         
         ],
     }
-    }    
+    },
+      computed:{
+        me(){
+            return this.$store.state.users.me;
+        },
+        
+    },  
 }
 </script>
 

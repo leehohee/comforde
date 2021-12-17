@@ -48,8 +48,21 @@
                     
                 
             </v-form>
+            
         </v-card>
+        <v-row>
+            <v-container>
+            <v-card elevation="0">
+                <v-row>
+                <v-col cols="9"><nuxt-link to="/signup"><span class="blue--text font-weight-bold text--darken-4">아직 회원이 아니신가요?</span></nuxt-link></v-col>
+                <v-col class="d-flex justify-center align-center" cols="3"><v-icon large>mdi-chevron-right</v-icon></v-col>
+                </v-row>
+            </v-card>
+            </v-container>
+        </v-row>
     </v-container>
+
+
     <v-container fluid v-else>
         <v-card fluid elevation="0" width="100%">
             <v-container fluid width="100%">
@@ -88,7 +101,9 @@ export default {
         me(){
             return this.$store.state.users.me;
         },
+        
     },
+    
     methods: {
         onSubmitForm(){
             if (this.$refs.form.validate()){

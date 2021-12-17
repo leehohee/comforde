@@ -50,18 +50,6 @@
                     :success="success"
                     @input="onChangeTextarea"
                 />
-                <h4 class="mt-5">취소 및 환불 규정</h4>
-                <div class="pa-1"><h5 class="grey--text">취소 및 환불규정은 판매하시는 서비스의 관련 법령에 따라 일괄 적용됩니다.</h5></div>
-                <h4 class="mt-5">가격설정</h4>
-                <v-text-field
-                    v-model="cost"
-                    dense
-                    clearable
-                    outlined
-                    required
-                    prepend-icon="mdi-currency-krw"
-                />
-                <v-btn type="submit" absolute right>제출하기</v-btn>
                 <input ref="imageInput" type="file" multiple hidden @change="onChangeImages">
                 <v-btn @click="onClickImageUpload" type="button">이미지등록</v-btn>
                 <div class="mt-5">
@@ -72,6 +60,20 @@
                         </div>
                     </div>
                 </div>
+                <h4 class="mt-5">취소 및 환불 규정</h4>
+                <div class="pa-1"><h5 class="grey--text">취소 및 환불규정은 판매하시는 서비스의 관련 법령에 따라 일괄 적용됩니다.</h5></div>
+                <h4 class="mt-5">가격설정</h4>
+                <v-text-field
+                    v-model="cost"
+                    dense
+                    clearable
+                    outlined
+                    required
+                    prepend-icon="mdi-currency-krw"
+                    :rules="costRules"
+                />
+                <v-btn type="submit" absolute right>제출하기</v-btn>
+                
             </v-form>
         </v-container>
     </v-card>
@@ -92,6 +94,11 @@ export default {
             category:'',
             value: 'Hello!',
             cost:'',
+
+            costRules: [
+                v=> !!v || '가격은 필수입니다.',
+                v => v.length >= 4 || '가격은 1000원 이상이어야 합니다.'
+            ],
         }
     },
     computed:{
@@ -108,10 +115,15 @@ export default {
             }
         },
         onSubmitForm(){
+            
+        },
+        onSubmitForm2(){
             if(this.$refs.form.validate()){
                 this.$store.dispatch('posts/addItem',{
                     content: this.content,
                     modify:this.modify,
+                    category:this.category,
+                    cost:this.cost,
                     
                 })
                     .then(()=>{
@@ -120,14 +132,15 @@ export default {
                         this.hideDetails = false;
                         this.success = true;
                         this.successMessages = '게시글 등록 성공!';
+
+                        this.$router.push({
+                            path: '/',
+                        });
                     })
                     .catch(()=>{
 
                     });
             }
-        },
-        onSubmitForm2(){
-            console.log(this.category);
                     
                     
                 

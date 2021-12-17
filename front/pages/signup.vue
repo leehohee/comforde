@@ -42,10 +42,11 @@
                     v-model="status"
                     row
                     required
+                    :rules="statusRules"
                     >
                         <v-radio
                             label="디자이너로 가입"
-                            value="designer"
+                            value="designerready"
                         ></v-radio>
                         <v-radio
                             label="의뢰인으로 가입"
@@ -81,16 +82,21 @@ export default {
             terms:false,
             emailRules: [  
                 v => !!v || '이메일은 필수입니다.',
+                v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || '이메일 형식에 맞아야합니다.',
             ],
             nicknameRules: [
                 v=> !!v || '닉네임은 필수입니다.',
+                v => v.length <= 10 || '닉네임은 10자 이하여야 합니다.'
             ],
             passwordRules: [
                 v=> !!v || '비밀번호는 필수입니다.',
             ],
             passwordCheckRules: [
                 v=> !!v || '비밀번호 확인은 필수입니다.',
-                //v => v === this.password || '비밀번호가 일치하지 않습니다.',
+                v => v === this.password || '비밀번호가 일치하지 않습니다.',
+            ],
+            statusRules: [
+                v=> !!v || '디자이너 혹은 의뢰인 확인은 필수입니다.',
             ],
         }
     },

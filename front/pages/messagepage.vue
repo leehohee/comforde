@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+        <div v-if="me">
          <v-list
           two-line
           subheader
@@ -99,13 +99,28 @@
             
           </v-list-item>
         </v-list>
+        </div>
+
+        <div v-else>
+          <LoginForm />
+        </div>
+
+
     </div>
     
     
 </template>
 
 <script>
+import LoginForm from '~/components/LoginForm';
+
+
 export default {
+    components: {
+        
+        
+        LoginForm,
+    },
     layout:'messagedefault',
     data () {
       return {
@@ -121,6 +136,12 @@ export default {
           { icon: 'mdi-account', iconClass: 'amber white--text', title: '영상제작스튜디오', subtitle: '33만원으로 제작된 영상입니다.' },
         ],
       }
+    },
+    computed:{
+        me(){
+            return this.$store.state.users.me;
+        },
+        
     },
 }
 </script>

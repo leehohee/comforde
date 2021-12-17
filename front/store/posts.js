@@ -7,6 +7,8 @@ export const state = () => ({
     main3Posts:[],
     hasMorePost: true,
     imagePaths:[],
+    mainItems:[],
+    searchItems:[],
     
 });
 
@@ -16,6 +18,10 @@ const totalPosts = 51;
 export const mutations = {
     addMainPost(state, payload) {
         state.mainPosts.unshift(payload);
+        state.imagePaths = [];
+    },
+    addItem(state, payload) {
+        state.mainItems.unshift(payload);
         state.imagePaths = [];
     },
     add2MainPost(state, payload) {
@@ -56,11 +62,22 @@ export const mutations = {
         
         state.hasMorePost = payload.length === 10;
     },
-    load3Posts(state, payload){
+    loadItems(state, payload){
+        console.log('loadItems');
         if (payload.reset) {
-            state.main3Posts = payload.data;
+            state.mainItems = payload.data;
         } else {
-            state.main3Posts = state.main3Posts.concat(payload.data);
+            state.mainItems = state.mainItems.concat(payload.data);
+        }
+        
+        //state.hasMorePost = payload.length === 10;
+    },
+    searchItems(state, payload){
+        if (payload.reset) {
+            state.searchItems = payload.data;
+            console.log(state.searchItems);
+        } else {
+            state.searchItems = state.searchItems.concat(payload.data);
         }
         
         //state.hasMorePost = payload.length === 10;
@@ -101,6 +118,25 @@ export const actions = {
             })
         
     },
+    addItem({ commit, state }, payload){
+        //서버에 게시글 등록 요청 보냄
+        this.$axios.post('/post/item',{
+            content: payload.content,
+            modify:payload.modify,
+            image: state.imagePaths,
+            cost:payload.cost,
+            category:payload.category,
+        },{
+            withCredentials: true,
+        })
+            .then((res)=>{
+                commit('addItem', res.data);
+            })
+            .catch((err)=>{
+                console.error(err);
+            })
+        
+    },
     add2({ commit, state }, payload){
         //서버에 게시글 등록 요청 보냄
         this.$axios.post('/post/house',{
@@ -120,6 +156,7 @@ export const actions = {
             })
         
     },
+    
     selecthouse({ commit, state }, payload){
         //서버에 게시글 등록 요청 보냄
         this.$axios.post('/post/selecthouse',{
@@ -222,12 +259,32 @@ export const actions = {
         console.error(err);
         }
     }, 2000),
-    load3Posts : throttle(async function({ commit, state },payload){
-        console.log('load3Posts');
+    loadItems : throttle(async function({ commit, state },payload){
+        
         try {
         
-            const res = await this.$axios.get(`/posts/images?limit=10`);
-            commit('load3Posts', {
+            const res = await this.$axios.get(`/posts/items?limit=10`);
+            commit('loadItems', {
+            data: res.data,
+            reset: true,
+            });
+            return;
+        
+        
+        } catch (err) {
+            console.error(err);
+        }
+    }, 2000),
+    searchItems : throttle(async function({ commit, state },payload){
+        console.log('actionsearchItems');
+        try {
+        
+            const res = await this.$axios.post(`/posts/searchitems?limit=10`, {
+               search : payload.search,
+            }, {
+                withCredentials: true,
+            });
+            commit('searchItems', {
             data: res.data,
             reset: true,
             });

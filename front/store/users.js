@@ -5,6 +5,7 @@ export const state = () => ({
     hasMoreFollower: true,
     hasMoreFollowing: true,
     other:null, //남의정보
+    
 });
   
 
@@ -92,6 +93,7 @@ export const actions = {
             email: payload.email,
             nickname: payload.nickname,
             password:payload.password,
+            status:payload.status,
         },{
             withCredentials:true, //서버가 다를때
         }).then((res)=>{
@@ -110,6 +112,7 @@ export const actions = {
             commit('setMe',res.data);
         }).catch((err)=>{
             console.error(err);
+            
         });
     },
     logOut({commit}){
@@ -119,6 +122,7 @@ export const actions = {
         .then((data)=>{
             commit('setMe', null);
         }).catch((err)=>{
+            
             console.error(err);
         });
         
